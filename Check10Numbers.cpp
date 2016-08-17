@@ -8,10 +8,11 @@
 // In Checkset add another 0 to check the 3 numbers (so that no 3 numbers adds up to 1 other number)
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // Given an array of 10 numbers, check if any 3 of the 10 add up to any of the others.
-bool CheckSet(int set[10])
+bool CheckSet(vector<int> set)
 	{
     // 1 number: Check that no two numbers are the same.
 	for (int i = 0; i < 9; i++)
@@ -27,6 +28,8 @@ bool CheckSet(int set[10])
 		}
 
 	// 2 numbers: No 2 numbers add up to the addition of any other two numbers.
+	// Add a 0 to the vector set so we check if 2 numbers adds up to any 1
+	set.push_back(0);
         // Scroll through 2 numbers at a time
         for(int i = 0; i < 10-1-1; i++)
         {
@@ -58,7 +61,8 @@ bool CheckSet(int set[10])
         }
 
 	// 3 numbers:
-        
+       	// Add a 0 to the vector set so we check if 3 numbers adds up to any 1
+	set.push_back(0);
         // Scroll through 3 numbers at a time
         for(int i = 0; i < 10-1-1; i++)
         {
@@ -99,11 +103,12 @@ int main()
 	{
 	// Get 10 numbers from user input
 	cout << "Enter your 10 numbers loser: " << endl;
-	int set[11] = { 0 };
-
+	vector<int> set;
+//	int set[11] = { 0 };
+	int temp;
 	for (int i = 0; i < 10; i++)
-		{ cin >> set[i]; }
-       
+//		{ cin >> set[i]; }
+  		{ cin >> temp; set.push_back(temp);}     
         
     // Check if this set is good.
 	bool isgood = CheckSet(set);
