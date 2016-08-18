@@ -75,10 +75,11 @@ bool CheckCoinsTaken(vector<int> set)
                             {
                                 // If the numbers are the same, there's no need to check.
                                 if(i == x && j == y && k == z) { continue; }
-				// We don't need to check two zeroes.
+				// We don't need to check two zeroes being included.
 				if(j == 12-2 && k == 12-1) { continue; }
 				if(y == 12-2 && z == 12-1) { continue; }
-                                
+				// Don't include it if two numbers + one zero and same numbers + diff zero
+         			if(i == x && j == y && (set[k] == 0 && set[z] == 0)) { continue; }                       
                                 // If the three numbers add up to each other then it's bad.
                                 if(set[i] + set[j] + set[k] == set[x] + set[y] + set[z])
                                 {
