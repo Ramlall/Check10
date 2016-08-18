@@ -1,18 +1,14 @@
-// Check10Numbers_IBMAug.cpp : Defines the entry point for the console application.
-//
-
 // Program that, given 10 numbers, checks if any 1, 2, or 3 numbers adds up to any combination of the rest.
 
-// TO-DO: Change int set[] to vector
-// In the Checkset add a 0 for 2 numbers
-// In Checkset add another 0 to check the 3 numbers (so that no 3 numbers adds up to 1 other number)
+
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 using namespace std;
 
 // Given an array of 10 numbers, check if any 3 of the 10 add up to any of the others.
-bool CheckSet(vector<int> set)
+bool CheckCoinsTaken(vector<int> set)
 	{
     // 1 number: Check that no two numbers are the same.
 	for (int i = 0; i < 9; i++)
@@ -101,53 +97,81 @@ bool CheckSet(vector<int> set)
 
 int main()
 	{
+	// Say the program started and open the file we're writing too.
+	cout << "Program started." << endl << endl;
+	ofstream file;
+	file.open ("answers.txt");
+	file << "Program started.\n\n" << flush;
+	//// JUST TEST A USER'S 10 NUMBERS
+	/* 
 	// Get 10 numbers from user input
-//	cout << "Enter your 10 numbers loser: " << endl;
+	cout << "Enter your 10 numbers loser: " << endl;
 	vector<int> set;
-//	int set[11] = { 0 };
-//	int temp;
-//	for (int i = 0; i < 10; i++)
-//		{ cin >> set[i]; }
-  	//	{ cin >> temp; set.push_back(temp);}     
+	int temp;
+	for (int i = 0; i < 10; i++)
+		{ cin >> temp; set.push_back(temp);}     
 
-/*
-1 3 5 12 21 37 65 68 71 174 FAILED
-2 4 6 13 22 38 66 69 72 174 FAILED
-1 3 5 20 35 61 67 68 73 174 FAILED
-4 5 6 29 38 54 67 70 73 174 FAILED
-
-1 5 6 19 34 37 62 68 74 174 FAILED
-5 6 7 30 39 55 68 71 74 174 FAILED
-1 2 6 34 53 62 68 71 74 174 FAILED
-
-1 4 7 13 22 40 63 73 74 174
-*/
-
-set.push_back(1);
-set.push_back(4);
-set.push_back(7);
-set.push_back(13);
-set.push_back(22);
-set.push_back(40);
-set.push_back(63);
-set.push_back(73);
-set.push_back(74);
-set.push_back(174);  
-
-for(int i = 1; i <= 174; i++)      
-{
-set[9] = i;
-    // Check if this set is good.
+	// Check if this set is good.
 	bool isgood = CheckSet(set);
 
-    // If it's good output that it's good.
-    if(isgood == true) { cout << "This set is good using " << i << endl; }
- }
-
+	// If it's good output that it's good.
+	if(isgood == true) { cout << "This set is good." << endl; }
+ 
+	*/
        
-	cout << "Program ended." << endl;
+	//// TEST ALL POSSIBLE NUMBERS
 
-	//char zzz;
-	//cin >> zzz;
-    return 0;
+
+	// Create a vector to hold how many coins we're taking from each bag and fill it with 10 dummy numbers.
+	vector<int> coinsTakenVector;
+	for(int i = 0; i < 10; i++)
+		{ coinsTakenVector.push_back(0); }
+	
+	// Guess how many coins to take from each bag.
+	for(int coinsTakenFromBag0 = 174; coinsTakenFromBag0 > 0; coinsTakenFromBag0--) { // Start with 174 since it's an obvious guess
+	for(int coinsTakenFromBag1 = 50; coinsTakenFromBag1 <= 173; coinsTakenFromBag1++) { if(coinsTakenFromBag1 == coinsTakenFromBag0) { continue; }
+	for(int coinsTakenFromBag2 = 20; coinsTakenFromBag2 <= 173; coinsTakenFromBag2++) { if(coinsTakenFromBag2 == coinsTakenFromBag0 || coinsTakenFromBag2 == coinsTakenFromBag1) { continue; }
+	for(int coinsTakenFromBag3 = 15; coinsTakenFromBag3 <= 173; coinsTakenFromBag3++) { if(coinsTakenFromBag3 == coinsTakenFromBag0 || coinsTakenFromBag3 == coinsTakenFromBag1 || coinsTakenFromBag3 == coinsTakenFromBag2) { continue; }
+	for(int coinsTakenFromBag4 = 10; coinsTakenFromBag4 <= 173; coinsTakenFromBag4++) { if(coinsTakenFromBag4 == coinsTakenFromBag0 || coinsTakenFromBag4 == coinsTakenFromBag1 || coinsTakenFromBag4 == coinsTakenFromBag2 || coinsTakenFromBag4 == coinsTakenFromBag3) { continue; }
+	for(int coinsTakenFromBag5 = 10; coinsTakenFromBag5 <= 173; coinsTakenFromBag5++) { if(coinsTakenFromBag5 == coinsTakenFromBag0 || coinsTakenFromBag5 == coinsTakenFromBag1 || coinsTakenFromBag5 == coinsTakenFromBag2 || coinsTakenFromBag5 == coinsTakenFromBag3 || coinsTakenFromBag5 == coinsTakenFromBag4) { continue; }
+	for(int coinsTakenFromBag6 = 4; coinsTakenFromBag6 <= 100; coinsTakenFromBag6++) { if(coinsTakenFromBag6 == coinsTakenFromBag0 || coinsTakenFromBag6 == coinsTakenFromBag1 || coinsTakenFromBag6 == coinsTakenFromBag2 || coinsTakenFromBag6 == coinsTakenFromBag3 || coinsTakenFromBag6 == coinsTakenFromBag4 || coinsTakenFromBag6 == coinsTakenFromBag5) { continue; }
+	for(int coinsTakenFromBag7 = 3; coinsTakenFromBag7 <= 100; coinsTakenFromBag7++) { if(coinsTakenFromBag7 == coinsTakenFromBag0 || coinsTakenFromBag7 == coinsTakenFromBag1 || coinsTakenFromBag7 == coinsTakenFromBag2 || coinsTakenFromBag7 == coinsTakenFromBag3 || coinsTakenFromBag7 == coinsTakenFromBag4 || coinsTakenFromBag7 == coinsTakenFromBag5 || coinsTakenFromBag7 == coinsTakenFromBag6) { continue; }
+	for(int coinsTakenFromBag8 = 2; coinsTakenFromBag8 <= 50; coinsTakenFromBag8++) { if(coinsTakenFromBag8 == coinsTakenFromBag0 || coinsTakenFromBag8 == coinsTakenFromBag1 || coinsTakenFromBag8 == coinsTakenFromBag2 || coinsTakenFromBag8 == coinsTakenFromBag3 || coinsTakenFromBag8 == coinsTakenFromBag4 || coinsTakenFromBag8 == coinsTakenFromBag5 || coinsTakenFromBag8 == coinsTakenFromBag6 || coinsTakenFromBag8 == coinsTakenFromBag7) { continue; }
+	for(int coinsTakenFromBag9 = 1; coinsTakenFromBag9 <= 50; coinsTakenFromBag9++) { if(coinsTakenFromBag9 == coinsTakenFromBag0 || coinsTakenFromBag9 == coinsTakenFromBag1 || coinsTakenFromBag9 == coinsTakenFromBag2 || coinsTakenFromBag9 == coinsTakenFromBag3 || coinsTakenFromBag9 == coinsTakenFromBag4 || coinsTakenFromBag9 == coinsTakenFromBag5 || coinsTakenFromBag9 == coinsTakenFromBag6 || coinsTakenFromBag9 == coinsTakenFromBag7 || coinsTakenFromBag9 == coinsTakenFromBag8) { continue; }
+	
+	// Edit our vector to what the guess is.
+	coinsTakenVector[0] = coinsTakenFromBag0;
+	coinsTakenVector[1] = coinsTakenFromBag1;
+	coinsTakenVector[2] = coinsTakenFromBag2;
+	coinsTakenVector[3] = coinsTakenFromBag3;
+	coinsTakenVector[4] = coinsTakenFromBag4;
+	coinsTakenVector[5] = coinsTakenFromBag5;
+	coinsTakenVector[6] = coinsTakenFromBag6;
+	coinsTakenVector[7] = coinsTakenFromBag7;
+	coinsTakenVector[8] = coinsTakenFromBag8;
+	coinsTakenVector[9] = coinsTakenFromBag9;
+
+	// Call our Check function to check this set of coins taken.		
+	bool setWorked = CheckCoinsTaken(coinsTakenVector);
+
+	// If setWorked is True then its a good set, output the set.
+	if(setWorked == true)
+		{
+		// Output the answer to console.
+		cout << "Found a working set! The set is: " << endl;
+		cout << coinsTakenVector[9] << " " << coinsTakenVector[8] << " " << coinsTakenVector[7] << " " << coinsTakenVector[6] << " " << coinsTakenVector[5] << " " << coinsTakenVector[4] << " " << coinsTakenVector[3] << " " << coinsTakenVector[2] << " " << coinsTakenVector[1] << " " << coinsTakenVector[0] << endl << endl;
+
+		// Output the answer to file.
+		file << "Found a working set! The set is: \n" << flush;
+		file << coinsTakenVector[9] << " " << coinsTakenVector[8] << " " << coinsTakenVector[7] << " " << coinsTakenVector[6] << " " << coinsTakenVector[5] << " " << coinsTakenVector[4] << " " << coinsTakenVector[3] << " " << coinsTakenVector[2] << " " << coinsTakenVector[1] << " " << coinsTakenVector[0] << "\n\n" << flush;
+		}
+
+	}}}}}}}}}}
+	
+	// Program is over.
+	file.close();
+	cout << "Program ended." << endl;
+	char zzz;
+	cin >> zzz;
+	return 0;
 	}
