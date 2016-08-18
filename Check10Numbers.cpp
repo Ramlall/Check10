@@ -11,7 +11,7 @@ using namespace std;
 bool CheckCoinsTaken(vector<int> set)
 	{
     // 1 number: Check that no two numbers are the same.
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 10-1; i++)
 		{
 		for (int j = i + 1; j < 10; j++)
 			{
@@ -75,6 +75,9 @@ bool CheckCoinsTaken(vector<int> set)
                             {
                                 // If the numbers are the same, there's no need to check.
                                 if(i == x && j == y && k == z) { continue; }
+				// We don't need to check two zeroes.
+				if(j == 12-2 && k == 12-1) { continue; }
+				if(y == 12-2 && z == 12-1) { continue; }
                                 
                                 // If the three numbers add up to each other then it's bad.
                                 if(set[i] + set[j] + set[k] == set[x] + set[y] + set[z])
@@ -102,8 +105,11 @@ int main()
 	ofstream file;
 	file.open ("answers.txt");
 	file << "Program started.\n\n" << flush;
+	
+
+	/*
 	//// JUST TEST A USER'S 10 NUMBERS
-	/* 
+	 
 	// Get 10 numbers from user input
 	cout << "Enter your 10 numbers loser: " << endl;
 	vector<int> set;
@@ -112,15 +118,15 @@ int main()
 		{ cin >> temp; set.push_back(temp);}     
 
 	// Check if this set is good.
-	bool isgood = CheckSet(set);
+	bool isgood = CheckCoinsTaken(set);
 
 	// If it's good output that it's good.
 	if(isgood == true) { cout << "This set is good." << endl; }
- 
-	*/
+ 	*/
+	
        
-	//// TEST ALL POSSIBLE NUMBERS
 
+	//// TEST ALL POSSIBLE NUMBERS
 
 	// Create a vector to hold how many coins we're taking from each bag and fill it with 10 dummy numbers.
 	vector<int> coinsTakenVector;
@@ -168,6 +174,8 @@ int main()
 
 	}}}}}}}}}}
 	
+
+
 	// Program is over.
 	file.close();
 	cout << "Program ended." << endl;
