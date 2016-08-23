@@ -79,7 +79,7 @@ bool CheckCoinsTaken(vector<int> set)
 				if(j == 12-2 && k == 12-1) { continue; }
 				if(y == 12-2 && z == 12-1) { continue; }
 				// Don't include it if two numbers + one zero and same numbers + diff zero
-         			if(i == x && j == y && (set[k] == 0 && set[z] == 0)) { continue; }                       
+         			if(i == x && j == y && ((k == 12-2 && z == 12-1) || (k == 12-1 || z == 12-2)) ) { continue; }                       
                                 // If the three numbers add up to each other then it's bad.
                                 if(set[i] + set[j] + set[k] == set[x] + set[y] + set[z])
                                 {
